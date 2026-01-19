@@ -1,0 +1,52 @@
+/* All Products section: vertical list with internal scroll
+.all-product-section .all-product-grid {
+  display: wrap;
+  flex-direction: column;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center; 
+  /* center the single column within available width 
+  gap: 1.5rem;
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+   /* room for scrollbar 
+  width: 100%;
+  scrollbar-gutter: stable both-edges;
+   /* avoid layout shifts
+}
+
+@media (max-width: 768px) {
+  .all-product-section .all-product-grid {
+    max-height: none;
+    overflow-y: visible;
+    align-items: center;
+  }
+} */
+
+.all-product-section .all-product-grid {
+  display: grid;
+  /* Define 3 equal columns */
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 1.5rem;
+  
+  /* Scroll settings */
+  max-height: 600px;
+  overflow-y: auto;
+  padding: 0.5rem; /* added padding for better visual breath */
+  width: 100%;
+  scrollbar-gutter: stable;
+}
+
+/* Optional: Mobile Responsiveness */
+@media (max-width: 768px) {
+  .all-product-section .all-product-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 items on tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .all-product-section .all-product-grid {
+    grid-template-columns: 1fr; /* 1 item on phones */
+  }
+}

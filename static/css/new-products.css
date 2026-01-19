@@ -1,0 +1,23 @@
+/* New Products section: horizontal scroller */
+.new-product-section .new-product-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 1.5rem;
+  padding-bottom: 0.5rem;
+  scroll-snap-type: x mandatory;
+  width: 100%;
+  margin: 0;
+  overscroll-behavior-x: contain;
+  scrollbar-gutter: stable both-edges;
+}
+
+.new-product-section .product-card {
+  flex: 0 0 var(--card-w);
+  scroll-snap-align: start;
+}
+
+@media (max-width: 768px) {
+  .new-product-section .new-product-grid { gap: 1rem; }
+}

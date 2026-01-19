@@ -1,0 +1,26 @@
+/* Promotions sidebar grid */
+/* .promotions-products-sidebar {
+  display: grid;
+  gap: 1.5rem;
+} */
+
+.promotions-products-sidebar {
+  display: grid;
+  grid-template-columns: 1fr; /* Single column for sidebar */
+  gap: 1.5rem;
+  
+  /* Constraints to prevent page growth */
+  max-height: calc(100vh + 50px); /* Adjust '40px' based on your header/margin height */
+  overflow-y: auto;
+  
+  /* Aesthetic scrollbar tweaks */
+  padding-right: 0.5rem; 
+  scrollbar-gutter: stable;
+}
+
+.logo-company {
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin: 10px;
+}

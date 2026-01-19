@@ -1,0 +1,137 @@
+/* Base and layout */
+:root {
+  --page-max: 1200px;
+  --card-w: 280px;
+  --card-h: 420px;
+  --sidebar-w: 260px;
+}
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+html, body {
+  overflow-x: hidden; /* prevent page-level horizontal scroll */
+}
+
+/* Constrain page width to header/footer limit */
+body > header, .container, footer {
+  max-width: var(--page-max);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+header .logo img {
+  height: 40px;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+header nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+header .actions a {
+  text-decoration: none;
+  color: #333;
+  margin-left: 1rem;
+}
+
+header .actions .cart {
+  background-color: #333;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+
+/* Layout */
+.container {
+  display: flex;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+main {
+  flex: 1 1 auto;
+  min-width: 0; /* allow flexed main to shrink and prevent overflow */
+}
+
+/* Generic sidebar container (if used) */
+.sidebar {
+  flex: 0 0 var(--sidebar-w); /* fixed width sidebar */
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+/* Search + section headings */
+.search-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.search-section input {
+  width: 50%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-section button {
+  padding: 0.8rem 1.5rem;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.product-section {
+  margin-bottom: 3rem;
+}
+
+.product-section h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: #333;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #333;
+  color: #fff;
+  width: 100%;
+}

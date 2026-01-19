@@ -1,0 +1,6 @@
+/* Core styles moved to separate CSS files for maintainability */
+@import url('./base.css');
+@import url('./card.css');
+@import url('./new-products.css');
+@import url('./all-products.css');
+@import url('./promotions.css');
