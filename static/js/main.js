@@ -61,4 +61,13 @@ document.addEventListener('DOMContentLoaded', () => {
             allProductsContainer.innerHTML += createProductCard(product);
         });
     }
+
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+
+    searchButton.addEventListener('click', () => {
+        const query = searchInput.value.toLowerCase();
+        sessionStorage.setItem('searchQuery', query);
+        window.location.href = 'search.html';
+    });
 });
