@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to generate a standard product card
     const createProductCard = (product) => {
         return `
-            <div class="product-card" tabindex="0">
+            <div class="product-card" tabindex="0" data-codebar="${product.codeBar || ''}">
                 <div class="product-type-badge">${product.type}</div>
                 <div class="product-image">
                     <img src="${product.image}" alt="${product.name}">
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to generate a promotion product card
     const createPromotionCard = (product) => {
         return `
-            <div class="product-card promotion" tabindex="0">
+            <div class="product-card promotion" tabindex="0" data-codebar="${product.codeBar || ''}">
                 <div class="product-image">
                     <img src="${product.image}" alt="${product.name}">
                     <div class="product-overlay">
@@ -129,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const image = card.querySelector('img').src;
+            const codeBar = card.dataset.codebar || 'N/A';
 
             // Generate a pseudo-ID if not available, or use name as ID for now
             const id = name.replace(/\s+/g, '-').toLowerCase();
@@ -137,7 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: id,
                 name: name,
                 price: price,
-                image: image
+                image: image,
+                codeBar: codeBar
             };
 
             CartService.addToCart(product, quantity);
@@ -230,6 +232,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (closeCartBtn) {
         closeCartBtn.addEventListener('click', closeCart);
+    }
+
+    // Checkout Logic
+    const checkoutBtn = document.querySelector('.checkout-btn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', () => {
+            const cart = CartService.getCart();
+            if (cart.length === 0) {
+                alert('Votre panier est vide.');
+                return;
+            }
+
+            const name = document.getElementById('buyer-name').value.trim();
+            const address = document.getElementById('buyer-address').value.trim();
+            const phone = document.getElementById('buyer-phone').value.trim();
+
+            if (!name || !address || !phone) {
+                alert('Veuillez remplir toutes les informations de livraison (Nom, Adresse, Téléphone).');
+                return;
+            }
+
+            let message = `*Nouvelle Commande*\n\n`;
+            message += `*Client:* ${name}\n`;
+            message += `*Adresse:* ${address}\n`;
+            message += `*Téléphone:* ${phone}\n\n`;
+            message += `*Commande:*\n`;
+
+            cart.forEach(item => {
+                message += `- ${item.quantity} x ${item.name} (Ref: ${item.codeBar || 'N/A'}) (${item.price} MAD)\n`;
+            });
+
+            message += `\n*Total:* ${CartService.calculateTotal()} MAD`;
+
+            const encodedMessage = encodeURIComponent(message);
+            // Replace with actual business number
+            const phoneNumber = '212645994904';
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+            window.open(whatsappUrl, '_blank');
+        });
     }
 
     // Close modal when clicking outside
