@@ -4,14 +4,15 @@
 .all-product-section .all-product-grid {
   display: grid;
   /* Define 3 equal columns */
-  grid-template-columns: repeat(3, 1fr); 
+  grid-template-columns: repeat(auto-fill, 1fr); 
   gap: 1.5rem;
+  width: 100%;
+  height: calc(100vh - 10px); /* Adjust height based on header/footer */
   
   /* Scroll settings */
-  max-height: 600px;
+  max-height: auto;
   overflow-y: auto;
   padding: 0.5rem; /* added padding for better visual breath */
-  width: 100%;
   scrollbar-gutter: stable;
 }
 

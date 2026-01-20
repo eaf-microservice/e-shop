@@ -1,9 +1,4 @@
 /* Promotions sidebar grid */
-/* .promotions-products-sidebar {
-  display: grid;
-  gap: 1.5rem;
-} */
-
 /* Generic sidebar container (if used) */
 .sidebar {
   flex: 0 0 var(--sidebar-w);

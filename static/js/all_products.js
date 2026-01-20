@@ -80,6 +80,33 @@ const allProductsDB = {
             image: 'static/images/products/product3.avif',
             description: 'High-performance synthetic engine oil for all vehicles.',
             type: '10W40'
+        },
+        {
+            id: 'np07',
+            name: 'Synthetic Engine Oil 0W-20',
+            price: '55.99',
+            codeBar: '6789012345678',
+            image: 'static/images/products/product1.avif',
+            description: 'High-performance synthetic engine oil for all vehicles.',
+            type: '10W40'
+        },
+        {
+            id: 'np08',
+            name: 'Advanced Fuel System Cleaner',
+            price: '22.00',
+            codeBar: '8901234567890',
+            image: 'static/images/products/product2.avif',
+            description: 'High-performance synthetic engine oil for all vehicles.',
+            type: '10W40'
+        },
+        {
+            id: 'np09',
+            name: 'Advanced Fuel System Cleaner',
+            price: '22.00',
+            codeBar: '90123456789011',
+            image: 'static/images/products/product3.avif',
+            description: 'High-performance synthetic engine oil for all vehicles.',
+            type: '10W40'
         }
     ]
 };
