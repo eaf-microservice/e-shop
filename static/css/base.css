@@ -100,6 +100,22 @@ header .actions .cart {
   color: #fff;
   padding: 0.5rem 1rem;
   border-radius: 5px;
+  position: relative;
+  /* Ensure relative positioning for badge */
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  min-width: 18px;
+  text-align: center;
 }
 
 /* Layout */

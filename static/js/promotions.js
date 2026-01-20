@@ -22,7 +22,7 @@ const promoProductsDB = {
         },
         {
             id: 'promo03',
-            name: 'Brake Fluid DOT 4',
+            name: 'Brake Fluid DOT 5',
             price: '100.00',
             original_price: '150.00',
             codeBar: '9876543210237',
