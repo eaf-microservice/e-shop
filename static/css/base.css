@@ -169,7 +169,14 @@ footer {
   text-align: center;
   padding: 1rem;
   background-color: #333;
-  color: #fff;
+  background-image: url(../images/header.avif);
+  background-size: contain;
+  background-position: strat;
+  background-repeat: no-repeat;
+}
+
+footer p {
+  color: #00ff9d;
   width: 100%;
 }
 

@@ -1,53 +1,14 @@
-# EAF Shop
+# EAF-Shoop online
+![Logo](static/images/logo.png)
 
-EAF Shop is a client-side e-commerce platform designed to showcase and sell high-quality electronic products. The project is built using standard web technologies: HTML, CSS, and JavaScript, providing a rich user experience for browsing products, searching, and managing a shopping cart.
+A client-side e-commerce website template built with HTML, CSS, and vanilla JavaScript. It provides a rich user experience for browsing products, searching, and managing a shopping cart.
 
 ## Features
 
-*   **Product Display:** Browse through new products, a comprehensive list of all available products, and special promotions.
-*   **Search Functionality:** Easily find desired products using the integrated search bar.
-*   **Shopping Cart:** Add products to a cart for a seamless shopping experience (functionality implied by `cart.js`).
-*   **Responsive Design:** (Assumed based on modern web practices, can be confirmed with further investigation)
-*   **Error Handling:** Dedicated 404 error page for unhandled routes.
-
-## Project Structure
-
-The project is organized into a clear and maintainable structure:
-
-```
-.
-├── index.html                  # Main entry point of the application
-├── pages/
-│   ├── error404.html           # Custom 404 error page
-│   └── search.html             # Page to display search results
-└── static/
-    ├── css/                    # Contains all stylesheets
-    │   ├── all-products.css
-    │   ├── base.css
-    │   ├── card.css
-    │   ├── error404.css
-    │   ├── new-products.css
-    │   ├── promotions.css
-    │   ├── search.css
-    │   └── style.css           # Main styling file
-    ├── images/                 # Stores all project images
-    │   ├── 404.jpg
-    │   ├── header.avif
-    │   ├── logo_light.png
-    │   ├── logo.svg
-    │   ├── panier.png
-    │   └── products/           # Product specific images
-    │       ├── product1.avif
-    │       ├── product2.avif
-    │       └── product3.avif
-    └── js/                     # Contains all JavaScript files
-        ├── all_products.js     # Manages the display of all products
-        ├── cart.js             # Handles shopping cart functionality
-        ├── main.js             # Core application logic and event handling
-        ├── new_products.js     # Manages the display of new products
-        ├── promotions.js       # Handles promotions display
-        └── search.js           # Manages search functionality
-```
+*   **Product Display:** Browse new products, a comprehensive list of all available items, and special promotions.
+*   **Search Functionality:** Easily find products using the integrated search page.
+*   **Shopping Cart:** A simple and effective shopping cart system.
+*   **Error Handling:** A dedicated 404 error page for unhandled routes.
 
 ## Technologies Used
 
@@ -55,24 +16,59 @@ The project is organized into a clear and maintainable structure:
 *   **CSS3:** For styling and visual presentation.
 *   **JavaScript (ES6+):** For interactive functionalities and dynamic content.
 
+## Project Structure
+
+The project is organized into a clear and maintainable structure:
+
+```
+.
+├── .gitignore
+├── index.html
+├── README.md
+├── pages/
+│   ├── error404.html
+│   └── search.html
+└── static/
+    ├── css/
+    │   ├── all-products.css
+    │   ├── base.css
+    │   ├── card.css
+    │   ├── cart-modal.css
+    │   ├── error404.css
+    │   ├── new-products.css
+    │   ├── promotions.css
+    │   ├── search.css
+    │   └── style.css
+    ├── images/
+    │   ├── 404.jpg
+    │   ├── header.avif
+    │   ├── logo.png
+    │   ├── panier.png
+    │   ├── promo.png
+    │   └── products/
+    │       ├── product1.avif
+    │       ├── product2.avif
+    │       └── product3.avif
+    └── js/
+        ├── all_products.js
+        ├── cart.js
+        ├── main.js
+        ├── new_products.js
+        ├── promotions.js
+        └── search.js
+```
+
 ## Setup and Usage
 
 To run this project locally:
 
-1.  **Clone the repository:**
-    ```bash
-    git clone <repository-url>
-    ```
-2.  **Navigate to the project directory:**
-    ```bash
-    cd e-shop
-    ```
-3.  **Open `index.html`:** Simply open the `index.html` file in your web browser. Since this is a client-side application, no server setup is required.
+1.  Clone the repository.
+2.  Navigate to the project directory.
+3.  Open `index.html` in your web browser. No server setup is required.
 
-## Contact
+## License
 
-For any inquiries, please contact:
-*   **Telephone:** +212 645 994 904
-*   **Email:** EAF.microservice@gmail.com
-*   **Address:** Agdal Rabat
-*   **Designed by:** EAF microservice - [eaf-microservice.netlify.app](https://eaf-microservice.netlify.app/)
+This project is licensed under the MIT License - see the [LICENCE.txt](LICENCE.txt) file for details.
+
+---
+*This project was created by EAF microservice.*

@@ -5,9 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="El Azbi Fouad">
+    <meta name="description" content="EAF Shoop - Plateforme de commerce électronique dédiée à la vente de Huile moteur Castrol EDGE Professional.">
+    <meta name="keywords" content="EAF Shoop, online shop, e-commerce, Castrol EDGE Professional, huile moteur, lubrifiants automobiles, achat en ligne, longlife 100, promotions">
+    <meta name="copyright" content="EAF microservice">
+    <meta name="language" content="fr">
 
-    <title>EAF Shop</title>
-    <link rel="icon" type="image/png" href="static/images/logo_light.png">
+
+    <title>EAF Shoop</title>
+    <link rel="icon" type="image/png" href="static/images/logo.png">
     <link rel="stylesheet" href="static/css/style.css">
     <link rel="stylesheet" href="static/css/cart-modal.css">
 </head>
@@ -15,7 +20,7 @@
 <body>
     <header>
         <div class="logo">
-            <img src="static/images/logo_light.png" alt="EAF Shop Logo">
+            <img src="static/images/logo.png" alt="EAF Shop Logo">
         </div>
         <div class="actions">
             <a href="#" class="cart" id="cart-icon">
@@ -24,7 +29,6 @@
         </div>
     </header>
     <div class="container">
-
         <main>
             <section class="search-section">
                 <input type="text" id="search-input" placeholder="Rechercher des produits...">
@@ -42,23 +46,27 @@
             </section>
         </main>
         <aside class="sidebar">
-            <h2>Promotions</h2>
+            <div class="row-title-promo"><img class="promo-img" src="static/images/promo.png" alt="promotions"><h2>Promotions</h2></div>
             <div id="promotions" class="promotions-products-sidebar"></div>
             <br>
             <div class="separator"></div>
             <div id="info">
-                <img class="logo-company" src="static/images/logo_light.png" alt="Logo">
+                <img class="logo-company" src="static/images/logo.png" alt="Logo">
                 <p class="info-description">
-                    <span class="info-text">EAF microservice</span> est une plateforme de commerce
-                    électronique dédiée à la vente de produits électroniques de haute qualité.
+                    <span class="info-text">EAF Shoop</span> est une plateforme de commerce
+                    électronique dédiée à la vente de Huile moteur Castrol EDGE Professional.
                     Notre mission est de fournir à nos clients les meilleurs produits au meilleur prix,
                     avec un service client exceptionnel.
                 </p>
-                <p>
-                    <span class="info-text">Nous contacter:</span>
-                <ul>Telephone: +212 645 994 904</ul>
-                <ul>Email: EAF.microservice@gmail.com</ul>
-                <ul>Adresse: Agdal Rabat</ul>
+                <p class="info-description">
+                    • Lubrifiants automobiles • Achat immédiat en ligne à prix avantageux huile moteur Castrol EDGE Professional LL-III 5W-30 chez EAF Shoop
+                     • Huile moteur 5W–30 à bas prix à commander chez EAF Shoop • Huile pour moteur de voiture •
+                </p>
+                <span class="info-text">Nous contacter:</span>
+                <p class="info-contact">
+                    <ul>Telephone: +212 645 994 904</ul>
+                    <ul>Email: EAF.Shoop@gmail.com</ul>
+                    <ul>Adresse: Rabat-Sale-Temara</ul>
                 </p>
             </div>
         </aside>
@@ -102,7 +110,7 @@
     </div>
 
     <footer>
-        <p>EAF Shop &copy; 2026 All rights reserved.
+        <p>EAF Shoop &copy; <span id="current-year"></span> All rights reserved
             - Designed by
             <a href="https://eaf-microservice.netlify.app/" target="_blank" rel="noopener noreferrer"
                 style="color:aqua">

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to generate a standard product card
     const createProductCard = (product) => {
         return `
-            <div class="product-card" tabindex="0" data-codebar="${product.codeBar || ''}">
+            <div class="product-card" tabindex="0" data-codebar="${product.codeBar || ''}" data-id="${product.id || ''}">
                 <div class="product-type-badge">${product.type}</div>
                 <div class="product-image">
                     <img src="${product.image}" alt="${product.name}">
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to generate a promotion product card
     const createPromotionCard = (product) => {
         return `
-            <div class="product-card promotion" tabindex="0" data-codebar="${product.codeBar || ''}">
+            <div class="product-card promotion" tabindex="0" data-codebar="${product.codeBar || ''}" data-id="${product.id || ''}">
                 <div class="product-image">
                     <img src="${product.image}" alt="${product.name}">
                     <div class="product-overlay">
@@ -52,21 +52,21 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Populate New Products
-    if (newProductsDB && newProductsDB.newProducts) {
+    if (newProductsContainer && newProductsDB && newProductsDB.newProducts) {
         newProductsDB.newProducts.forEach(product => {
             newProductsContainer.innerHTML += createProductCard(product);
         });
     }
 
     // Populate Promotions
-    if (promoProductsDB && promoProductsDB.promotions) {
+    if (promotionsContainer && promoProductsDB && promoProductsDB.promotions) {
         promoProductsDB.promotions.forEach(product => {
             promotionsContainer.innerHTML += createPromotionCard(product);
         });
     }
 
     // Populate All Products
-    if (allProductsDB && allProductsDB.allProducts) {
+    if (allProductsContainer && allProductsDB && allProductsDB.allProducts) {
         allProductsDB.allProducts.forEach(product => {
             allProductsContainer.innerHTML += createProductCard(product);
         });
@@ -96,53 +96,61 @@ document.addEventListener('DOMContentLoaded', () => {
             const quantityInput = card.querySelector('.quantity-input');
             const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
 
-            // Extract product data from card
-            // Note: In a real app, we'd use data-id to fetch from DB, but here we can scrape or find in DB arrays
-            // Let's try to find the product object from our global DBs based on name or image, 
-            // OR better, let's attach data-id to the card when creating it.
-            // Since I didn't add data-id in the previous step, I'll assume I need to do it now or scrape.
-            // Let's scrape for now as it's easier without modifying the create functions again immediately.
+            // Try to find product from database using data-id
+            const productId = card.dataset.id;
+            let product = null;
 
-            const name = card.querySelector('h3').innerText;
-            const priceText = card.querySelector('.price').innerText;
-            // Clean price string (remove ' MAD' and 'original price' if present)
-            // If promotion, price text might contain original price. 
-            // The current HTML structure for promotion is: <p class="price"><span class="original">...</span> ACTUAL MAD</p>
-            // innerText will get both.
-
-            let price;
-            // Check if it's a promotion card to get the correct price
-            if (card.classList.contains('promotion')) {
-                // The price is the text node after the span, or we can just parse the whole text and take the last number
-                // A safer way is to look at the HTML structure again.
-                // <p class="price"><span class="original-price">...</span> ${product.price} MAD</p>
-                // We can get the text content of the parent and remove the text content of the span.
-                const priceEl = card.querySelector('.price');
-                const originalPriceEl = priceEl.querySelector('.original-price');
-                let priceString = priceEl.innerText;
-                if (originalPriceEl) {
-                    priceString = priceString.replace(originalPriceEl.innerText, '');
+            // Search in all product databases
+            if (productId) {
+                if (allProductsDB && allProductsDB.allProducts) {
+                    product = allProductsDB.allProducts.find(p => p.id === productId);
                 }
-                price = parseFloat(priceString.replace('MAD', '').trim());
-            } else {
-                price = parseFloat(priceText.replace('MAD', '').trim());
+                if (!product && newProductsDB && newProductsDB.newProducts) {
+                    product = newProductsDB.newProducts.find(p => p.id === productId);
+                }
+                if (!product && promoProductsDB && promoProductsDB.promotions) {
+                    product = promoProductsDB.promotions.find(p => p.id === productId);
+                }
             }
 
-            const image = card.querySelector('img').src;
-            const codeBar = card.dataset.codebar || 'N/A';
+            // If product found in DB, use it; otherwise extract from card
+            if (product) {
+                // Use the product from database, but adjust image path if needed
+                const imageSrc = card.querySelector('img').src;
+                CartService.addToCart({
+                    ...product,
+                    image: imageSrc // Use the actual displayed image path
+                }, quantity);
+            } else {
+                // Fallback: Extract product data from card (for backwards compatibility)
+                const name = card.querySelector('h3').innerText;
+                const priceText = card.querySelector('.price').innerText;
+                
+                let price;
+                if (card.classList.contains('promotion')) {
+                    const priceEl = card.querySelector('.price');
+                    const originalPriceEl = priceEl.querySelector('.original-price');
+                    let priceString = priceEl.innerText;
+                    if (originalPriceEl) {
+                        priceString = priceString.replace(originalPriceEl.innerText, '');
+                    }
+                    price = parseFloat(priceString.replace('MAD', '').trim());
+                } else {
+                    price = parseFloat(priceText.replace('MAD', '').trim());
+                }
 
-            // Generate a pseudo-ID if not available, or use name as ID for now
-            const id = name.replace(/\s+/g, '-').toLowerCase();
+                const image = card.querySelector('img').src;
+                const codeBar = card.dataset.codebar || 'N/A';
+                const id = productId || name.replace(/\s+/g, '-').toLowerCase();
 
-            const product = {
-                id: id,
-                name: name,
-                price: price,
-                image: image,
-                codeBar: codeBar
-            };
-
-            CartService.addToCart(product, quantity);
+                CartService.addToCart({
+                    id: id,
+                    name: name,
+                    price: price,
+                    image: image,
+                    codeBar: codeBar
+                }, quantity);
+            }
         }
     });
 
@@ -154,15 +162,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartTotalPrice = document.getElementById('cart-total-price');
 
     const openCart = () => {
+        if (!cartModalOverlay || !cartItemsContainer || !cartTotalPrice) {
+            console.error('Cart modal elements not found');
+            return;
+        }
         renderCart();
         cartModalOverlay.classList.add('open');
     };
 
     const closeCart = () => {
-        cartModalOverlay.classList.remove('open');
+        if (cartModalOverlay) {
+            cartModalOverlay.classList.remove('open');
+        }
     };
 
     const renderCart = () => {
+        if (!cartItemsContainer || !cartTotalPrice) {
+            return;
+        }
         const cart = CartService.getCart();
         cartItemsContainer.innerHTML = '';
 
@@ -289,13 +306,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
 
-    searchButton.addEventListener('click', () => {
-        const query = searchInput.value.trim(); // Use trim to handle whitespace only input
-        if (query === '') {
-            alert('Aucun terme de recherche fourni.'); // Simple alert for error message
-            return; // Do nothing further
-        }
-        sessionStorage.setItem('searchQuery', query.toLowerCase());
-        window.location.href = '../pages/search.html';
-    });
+    if (searchButton && searchInput) {
+        searchButton.addEventListener('click', () => {
+            const query = searchInput.value.trim(); // Use trim to handle whitespace only input
+            if (query === '') {
+                alert('Aucun terme de recherche fourni.'); // Simple alert for error message
+                return; // Do nothing further
+            }
+            sessionStorage.setItem('searchQuery', query.toLowerCase());
+            window.location.href = 'pages/search.html';
+        });
+    }
+});
+
+// Update footer year
+document.addEventListener('DOMContentLoaded', () => {
+    const yearSpan = document.getElementById('current-year');
+    const currentYear = new Date().getFullYear();
+    yearSpan.textContent = currentYear;
 });

@@ -1,6 +1,6 @@
 const createProductCard = (product) => {
     return `
-        <div class="product-card" tabindex="0">
+        <div class="product-card" tabindex="0" data-codebar="${product.codeBar || ''}" data-id="${product.id || ''}">
             <div class="product-type-badge">${product.type}</div>
             <div class="product-image">
                 <img src="../${product.image}" alt="${product.name}">
@@ -10,6 +10,11 @@ const createProductCard = (product) => {
             </div>
             <h3>${product.name}</h3>
             <p class="price">${product.price} MAD</p>
+            <div class="quantity-control">
+                <button class="quantity-btn minus">-</button>
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="quantity-btn plus">+</button>
+            </div>
             <button class="add-to-cart">Ajouter au panier</button>
         </div>
     `;
